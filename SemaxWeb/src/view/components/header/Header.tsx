@@ -19,11 +19,11 @@ const Header = () => {
 
                 <div className={classes.menu}>
                     <div className={classes.navbarToggle} onClick={() => setMenuOpen(!isMenuOpen)}>
-                        <span className={classes.iconBar}></span>
-                        <span className={classes.iconBar}></span>
-                        <span className={classes.iconBar}></span>
+                        <span className={`${classes.iconBar} ${isMenuOpen ? classes.closeFirst : ''}`}></span>
+                        <span className={`${classes.iconBar} ${isMenuOpen ? classes.hideMiddle : ''}`}></span>
+                        <span className={`${classes.iconBar} ${isMenuOpen ? classes.closeLast : ''}`}></span>
                     </div>
-                    { isMenuOpen && (
+                    {/* { isMenuOpen && (
                         <nav className={classes.menuNav}>
                             <NavButton path='/Home'>Home</NavButton>
                             <NavButton path='/Services'>Services</NavButton>
@@ -31,7 +31,7 @@ const Header = () => {
                             <NavButton path='/Contact'>Contact</NavButton>
                         </nav>
                     )
-                    }
+                    } */}
                 </div>
             </div>
         </header>
