@@ -8,11 +8,9 @@ interface NavButtonProps {
 
 const NavButton = ({ path, children }: NavButtonProps) => {
     return (
-        <div className={classes.button}>
-            <Link to={path}>
-                <p className={classes.text}>{children}</p>
-            </Link>
-        </div>
+        <Link to={path}>
+            <p className={classes.text}>{children}</p>
+        </Link>
     )
 }
 
