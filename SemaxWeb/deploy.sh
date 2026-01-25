@@ -22,6 +22,8 @@ cp index.html 404.html
 # create empty .nojekyll file to bypass Jekyll processing (a gitHub thing)
 echo > .nojekyll
 
+echo "www.semaxsolutions.nl" > CNAME
+
 # initialize git IN THE DIST FOLDER (we navigated here above)
 git init
 # if not exists create a new local branche called 'deploy' 
