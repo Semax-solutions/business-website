@@ -30,6 +30,10 @@
         justify-self: left;
     }
 
+    .menu {
+        display: none;
+    }
+
     .nav {
         justify-self: end;
         display: flex;
@@ -99,7 +103,6 @@
         position: absolute;
         right: 0;
         display: inline-block;
-        /* min-height: 2rem; */
         cursor: pointer; 
     }
 
