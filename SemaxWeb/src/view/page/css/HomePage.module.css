@@ -55,7 +55,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 1000px;
+  max-width: 1000px;
   text-align: center;
 }
 
@@ -65,4 +65,19 @@
 .innerContainer > p {
   font-size: 1.25rem;
   font-weight: 500;
+}
+
+/* Desktop (default styles) */
+@media (min-width: 1025px) {
+
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  
 }
