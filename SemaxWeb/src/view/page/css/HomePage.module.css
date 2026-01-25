@@ -42,10 +42,27 @@
 }
 
 .container {
-    flex: 1;
-    min-height: calc(100vh - 80px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color-main);
+}
+
+.innerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 1000px;
+  text-align: center;
+}
+
+.innerContainer > h1 {
+  margin: 0;
+}
+.innerContainer > p {
+  font-size: 1.25rem;
+  font-weight: 500;
 }
