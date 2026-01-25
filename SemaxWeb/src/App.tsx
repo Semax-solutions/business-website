@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <div className={styles.container}>
-        <img className={styles.logo} src="./public/Semax_Logo.svg" alt="Semax Logo" width={200} />
+        <img className={styles.logo} src="/Semax_Logo.svg" alt="Semax Logo" width={200} />
         Semax Website
       </div>
     </>
