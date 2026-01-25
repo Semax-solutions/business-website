@@ -11,25 +11,25 @@ const Header = () => {
                  <img className={classes.logo} alt='Company logo' src='/Header_logo.png'></img>
 
                 <nav className={classes.nav}>
-                    <NavButton path='/Home'>Home</NavButton>
-                    <NavButton path='/Services'>Services</NavButton>
-                    <NavButton path='/About'>About</NavButton>
-                    <NavButton path='/Contact'>Contact</NavButton>
+                    <NavButton path='/home'>Home</NavButton>
+                    <NavButton path='/services'>Services</NavButton>
+                    <NavButton path='/about'>About</NavButton>
+                    <NavButton path='/contact'>Contact</NavButton>
                 </nav>
 
                 <div className={`${classes.menu} ${isMenuOpen ? classes.menuOpen : ''}`}>
                     <nav className={classes.menuItems} onClick={() => setMenuOpen(false)}>
                         <div className={classes.menuItem}>
-                            <NavButton path='/Home'>Home</NavButton>
+                            <NavButton path='/home'>Home</NavButton>
                         </div>
                         <div className={classes.menuItem}>
-                            <NavButton path='/Services'>Services</NavButton>
+                            <NavButton path='/services'>Services</NavButton>
                         </div>
                         <div className={classes.menuItem}>
-                            <NavButton path='/About'>About</NavButton>
+                            <NavButton path='/about'>About</NavButton>
                         </div>
                         <div className={classes.menuItem}>
-                            <NavButton path='/Contact'>Contact</NavButton>
+                            <NavButton path='/contact'>Contact</NavButton>
                         </div>
                     </nav>
                 </div>
