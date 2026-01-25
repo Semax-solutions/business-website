@@ -1,15 +1,15 @@
-import styles from './App.module.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import HomePage from './view/page/HomePage'
 
 
 function App() {
-
   return (
-    <>
-      <div className={styles.container}>
-        <img className={styles.logo} src="/Semax_Logo.svg" alt="Semax Logo" width={200} />
-        Semax Website
-      </div>
-    </>
+    <Router>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/home' element={<HomePage />} />
+        </Routes>
+    </Router>
   )
 }
 
