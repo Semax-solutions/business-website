@@ -1,0 +1,52 @@
+.footer {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 1fr;
+    gap: 40px;
+    background-color: var(--primary-color-header);
+    padding: 0 40px 0 20px;
+}
+
+.logo {
+    padding: 10px 20px 0 0;
+    justify-self: start;
+}
+
+.contact, .services, .company {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.4;
+}
+
+.linkContainer {
+    display: flex;
+    flex-direction: column;
+}
+.linkDiv {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    width: max-content;
+    align-items: center;
+}
+
+.link {
+    display: inline-block;
+    color: var(--secondary-color-highligts);
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.linkDiv:hover {
+    transform: translateX(5px);
+}
+.link > p {
+    display: block;
+    margin: 0;
+}
+
+.icon {
+    width: 20px;
+    height: 16px;
+}

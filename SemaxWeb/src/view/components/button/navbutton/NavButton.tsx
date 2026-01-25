@@ -3,13 +3,14 @@ import classes from './NavButton.module.css'
 
 interface NavButtonProps {
     path: string,
-    children: string
+    children: string,
+    color?: string
 }
 
-const NavButton = ({ path, children }: NavButtonProps) => {
+const NavButton = ({ path, children, color }: NavButtonProps) => {
     return (
         <Link to={path}>
-            <p className={classes.text}>{children}</p>
+            <p className={classes.text} style={{color: color}}>{children}</p>
         </Link>
     )
 }
