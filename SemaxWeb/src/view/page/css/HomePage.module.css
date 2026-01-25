@@ -43,10 +43,13 @@
 
 .container {
   margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
-  place-items: center;
+  align-items: center;
   flex-direction: column;
   justify-content: center;
-  min-width: 320px;
-  min-height: 100vh;
+  
 }

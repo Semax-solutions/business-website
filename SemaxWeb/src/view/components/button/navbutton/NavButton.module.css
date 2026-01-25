@@ -1,0 +1,14 @@
+.button {
+
+}
+
+.text {
+    text-decoration: none;
+    color: var(--accent-color-clean, white);
+    font-size: 18px;
+}
+
+.text:hover {
+    color: var(--secondary-color-text);
+    transition: .25s;
+}
