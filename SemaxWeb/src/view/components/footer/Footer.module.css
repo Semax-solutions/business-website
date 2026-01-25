@@ -1,9 +1,12 @@
 .footer {
+    background-color: var(--primary-color-header);
+    padding: 0 40px 64px 20px;
+}
+
+.footerContainer {
     display: grid;
     grid-template-columns: auto 1fr 1fr 1fr;
     gap: 40px;
-    background-color: var(--primary-color-header);
-    padding: 0 40px 0 20px;
 }
 
 .logo {
@@ -49,4 +52,34 @@
 .icon {
     width: 20px;
     height: 16px;
+}
+
+.footerBottom {
+    padding-top: 140px;
+}
+
+.footerBottomContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0.6;
+    color: #C3BFBF;
+}
+
+.copyright {
+    display: flex;
+}
+
+.footerBottom P {
+    margin: 0;
+}
+
+.policyLinks {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.policyLinks > a {
+    color: #C3BFBF;
 }
