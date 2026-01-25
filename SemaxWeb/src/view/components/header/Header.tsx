@@ -3,7 +3,7 @@ import NavButton from '../button/navbutton/NavButton';
 import classes from './Header.module.css'
 
 const Header = () => {
-    const [isMenuOpen, setMenuOpen] = useState(true);
+    const [isMenuOpen, setMenuOpen] = useState(false);
 
     return (
         <header className={classes.header}>
