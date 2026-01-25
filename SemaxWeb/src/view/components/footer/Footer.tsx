@@ -84,7 +84,7 @@ const Footer = () => {
             <div className={classes.footerBottom}>
                 <div className={classes.footerBottomContainer}>
                     <div className={classes.copyright}>
-                        <p>Copyright 2026 © Semax Solutions </p>
+                        <p>Copyright {new Date().getFullYear()} © Semax Solutions </p>
                     </div>
 
                     <div className={classes.policyLinks}>
