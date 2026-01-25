@@ -8,10 +8,8 @@ const Footer = () => {
                 <img className={classes.logo} alt='Company logo' src='/Header_logo.png'></img>
 
                 <div className={classes.contact}>
+                    <p className={classes.titleInfo}>Contact</p>
                     <p>
-                        <strong>Contact</strong>
-                        <br></br>
-                        <br></br>
                         Semax Solutions
                         <br></br>
                         P.C. Staalweg 12
@@ -47,17 +45,12 @@ const Footer = () => {
                                 <p>Sem Winters</p>
                             </Link>
                         </div>
-                        
-                    
-                        
                     </div>
                 </div>
 
                 <div className={classes.services}>
+                    <p className={classes.titleInfo}>Services</p>
                     <p>
-                        <strong>Services</strong>
-                        <br></br>
-                        <br></br>
                         Software development
                         <br></br>
                         IT consulting
@@ -66,10 +59,8 @@ const Footer = () => {
                 </div>
 
                 <div className={classes.company}>
+                    <p className={classes.titleInfo}>Company</p>
                     <p>
-                        <strong>Company</strong>
-                        <br></br>
-                        <br></br>
                         About us
                         <br></br>
                         Careers

@@ -77,9 +77,14 @@
 .policyLinks {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
+    gap: 20px;
 }
 
 .policyLinks > a {
     color: #C3BFBF;
+}
+
+.titleInfo {
+    font-weight: 600;
+    font-size: 1.2rem;
 }
