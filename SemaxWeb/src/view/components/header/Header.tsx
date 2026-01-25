@@ -3,7 +3,7 @@ import NavButton from '../button/navbutton/NavButton';
 import classes from './Header.module.css'
 
 const Header = () => {
-    const [isMenuOpen, setMenuOpen] = useState(false);
+    const [isMenuOpen, setMenuOpen] = useState(true);
 
     return (
         <header className={classes.header}>
@@ -17,21 +17,26 @@ const Header = () => {
                     <NavButton path='/Contact'>Contact</NavButton>
                 </nav>
 
-                <div className={classes.menu}>
-                    <div className={classes.navbarToggle} onClick={() => setMenuOpen(!isMenuOpen)}>
-                        <span className={`${classes.iconBar} ${isMenuOpen ? classes.closeFirst : ''}`}></span>
-                        <span className={`${classes.iconBar} ${isMenuOpen ? classes.hideMiddle : ''}`}></span>
-                        <span className={`${classes.iconBar} ${isMenuOpen ? classes.closeLast : ''}`}></span>
-                    </div>
-                    {/* { isMenuOpen && (
-                        <nav className={classes.menuNav}>
+                <div className={`${classes.menu} ${isMenuOpen ? classes.menuOpen : ''}`}>
+                    <nav className={classes.menuItems} onClick={() => setMenuOpen(false)}>
+                        <div className={classes.menuItem}>
                             <NavButton path='/Home'>Home</NavButton>
+                        </div>
+                        <div className={classes.menuItem}>
                             <NavButton path='/Services'>Services</NavButton>
+                        </div>
+                        <div className={classes.menuItem}>
                             <NavButton path='/About'>About</NavButton>
+                        </div>
+                        <div className={classes.menuItem}>
                             <NavButton path='/Contact'>Contact</NavButton>
-                        </nav>
-                    )
-                    } */}
+                        </div>
+                    </nav>
+                </div>
+                <div className={classes.navbarToggle} onClick={() => setMenuOpen(!isMenuOpen)}>
+                    <span className={`${classes.iconBar} ${isMenuOpen ? classes.closeFirst : ''}`}></span>
+                    <span className={`${classes.iconBar} ${isMenuOpen ? classes.hideMiddle : ''}`}></span>
+                    <span className={`${classes.iconBar} ${isMenuOpen ? classes.closeLast : ''}`}></span>
                 </div>
             </div>
         </header>
