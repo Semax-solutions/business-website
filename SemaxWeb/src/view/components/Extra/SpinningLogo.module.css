@@ -1,0 +1,16 @@
+.logo {
+  width: 120px;
+  cursor: pointer;
+  will-change: transform;
+}
+
+.logo:active {
+  transform: scale(0.96);
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
