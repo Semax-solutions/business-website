@@ -1,12 +1,13 @@
 import { useRef } from 'react'
 import classes from './css/HomePage.module.css'
+import Card from '../components/card/Card'
 
 const HomePage = () => {
     const servicesRef = useRef<null | HTMLElement>(null)
 
     return (
         <main>
-            <section className={classes.contentRow}>
+            <section className={`${classes.contentRow} ${classes.primaryBackground}`}>
                 <div className={classes.container}>
                     <div className={classes.innerContainer}>
                         <img className={classes.logo} src="/Semax_Logo.svg" alt="Semax Logo" width={200} />
@@ -25,7 +26,15 @@ const HomePage = () => {
             </section>
 
             <section ref={servicesRef} className={`${classes.contentRow} ${classes.whiteBackground}`}>
-
+                <div className={classes.container}>
+                    <h1 style={{color: 'black'}}>Our services</h1>
+                    <div className={classes.cardContainer}>
+                        <Card icon={null} title='Web Development' description='From dynamic, responsive front-end interfaces using JavaScript, TypeScript, HTML, and CSS to powerful back-end solutions in Java, Go, and Python, we build websites and web'/>
+                        <Card icon={null} title='Web Development' description='From dynamic, responsive front-end interfaces using JavaScript, TypeScript, HTML, and CSS to powerful back-end solutions in Java, Go, and Python, we build websites and web'/>
+                        <Card icon={null} title='Web Development' description='From dynamic, responsive front-end interfaces using JavaScript, TypeScript, HTML, and CSS to powerful back-end solutions in Java, Go, and Python, we build websites and web'/>
+                        <Card icon={null} title='Web Development' description='From dynamic, responsive front-end interfaces using JavaScript, TypeScript, HTML, and CSS to powerful back-end solutions in Java, Go, and Python, we build websites and web'/>
+                    </div>
+                </div>
             </section>
             
         </main>

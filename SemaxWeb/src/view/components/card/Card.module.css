@@ -1,0 +1,50 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    color: black;
+    border: 1px oklch(0.97 0.01 -3 / 1) solid;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    background-color: oklch(.984 .014 180.72);
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+.icon path {
+    stroke: var(--primary-color-main);
+}
+
+.card:hover path {
+    stroke: var(--accent-color-clean);
+} 
+
+.card:hover .icon {
+    background-color: var(--primary-color-main);
+} 
+
+.title {
+    font-size: 1.2rem;
+    margin: 0 0 12px 0;
+}
+
+.description {
+    color: var(--secondary-color-text);
+    font-weight: 600;
+    margin: 0;
+}
