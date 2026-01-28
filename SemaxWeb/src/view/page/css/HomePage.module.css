@@ -41,10 +41,19 @@
   color: #888;
 }
 
+.contentRow {
+  min-height: 100vh;
+}
+
+.whiteBackground {
+  background-color: var(--secondary-color-background);
+}
+
 .container {
   flex: 1;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: var(--primary-color-main);
@@ -65,6 +74,42 @@
 .innerContainer > p {
   font-size: 1.25rem;
   font-weight: 500;
+}
+
+.arrowDownContainer {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 40px;
+  animation: arrow 2s linear infinite;
+  cursor: pointer;
+}
+
+.arrowDownContainer:hover {
+  background-color: #aaa5a54f;
+  border-radius: 50%;
+}
+
+.chevron {
+  stroke: var(--accent-color-clean);
+}
+
+@keyframes arrow {
+  0% {
+    transform: translate(0px, 0);
+  }
+
+  50% {
+    transform: translate(0px, 10px);
+  }
+
+  100% {
+    transform: translate(0px, 0);
+  }
+
 }
 
 /* Desktop (default styles) */
