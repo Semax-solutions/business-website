@@ -3,6 +3,7 @@ import classes from './css/TestPage.module.css'
 
 const TestPage = () => {
     const canvasRef = useRef<null | HTMLCanvasElement>(null)
+    const scaleRef = useRef<number>(0.65);
 
     const makeDotsArraylist = (width: number, height: number, spacing = 10) => {
     // WebGL expects coordinates in normalized device coordinates [-1, 1]
@@ -178,6 +179,148 @@ const TestPage = () => {
             dotVertices.length / 2
         )
     }
+
+    useEffect(() => {
+        const handleWheel = (e: WheelEvent) => {
+            e.preventDefault();
+            // Change scale by scroll direction
+            scaleRef.current += e.deltaY * -0.001; // scroll up → bigger, scroll down → smaller
+            scaleRef.current = Math.min(Math.max(scaleRef.current, 0.1), 2.0); // clamp 0.1..2
+            drawDots(); // redraw with new scale
+        };
+
+        window.addEventListener("wheel", handleWheel, { passive: false });
+        return () => window.removeEventListener("wheel", handleWheel);
+    }, []);
+
+    useEffect(() => {
+        drawDots();
+    }, []);
+
+    const drawDots = () => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const gl = canvas.getContext("webgl2");
+        if (!gl) return;
+
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.clearColor(0.08, 0.08, 0.08, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+        const dotVertices = makeDotsArraylist(canvas.clientWidth, canvas.clientHeight, 30);
+        const dotBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, dotBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, dotVertices, gl.STATIC_DRAW);
+
+         const vertexShaderSourceCode = `#version 300 es
+        precision mediump float;
+
+        //Two Floating point in it: X, Y
+        in vec2 vertPosition;
+        uniform float u_tilt;     // backward tilt
+        uniform float u_fov;      // perspective
+        uniform float u_offsetY;  // shift grid up
+        uniform float u_scale;    // shrink grid
+
+        void main() {
+            // scale first
+            float x = vertPosition.x * u_scale;
+            float y = vertPosition.y * u_scale;
+            float z = 0.0;
+
+            // rotate backward around X-axis
+            float cosA = cos(u_tilt);
+            float sinA = sin(u_tilt);
+            float yRot = y * cosA - z * sinA;
+            float zRot = y * sinA + z * cosA;
+
+            // move grid up
+            yRot += u_offsetY;
+
+            // perspective projection
+            float scale = u_fov / (u_fov + zRot);
+            vec2 projected = vec2(x * scale, yRot * scale);
+
+            gl_Position = vec4(projected, 0.0, 1.0);
+            gl_PointSize = 5.0; // visible dots
+        }`;
+
+        const vertexShader = gl.createShader(gl.VERTEX_SHADER)!
+
+        gl.shaderSource(vertexShader, vertexShaderSourceCode);
+        gl.compileShader(vertexShader)
+
+        if(!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
+            const compileError = gl.getShaderInfoLog(vertexShader);
+            console.error(compileError)
+            return;
+        }
+
+        const fragmentShaderSourceCode = `#version 300 es
+        precision mediump float;
+
+        out vec4 outputColor;
+
+        void main() {
+            // (R, G, B, A)
+            outputColor = vec4(0.294, 0.0, 0.51, 1.0);
+        }`;
+
+        const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER)!
+
+        gl.shaderSource(fragmentShader, fragmentShaderSourceCode);
+        gl.compileShader(fragmentShader)
+
+        if(!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
+            const compileError = gl.getShaderInfoLog(fragmentShader);
+            console.error(compileError)
+            return;
+        }
+
+        // Connect vertex and fragment shader to progam (do not use vertex and fragment shader independly)
+        const shaderProgram = gl.createProgram();
+        gl.attachShader(shaderProgram, vertexShader);
+        gl.attachShader(shaderProgram, fragmentShader);
+
+        // Link program to check if vertex and fragment shader are compatiable with each other
+        gl.linkProgram(shaderProgram);
+
+        if(!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+            const linkError = gl.getProgramInfoLog(shaderProgram);
+            console.error(linkError);
+            return;
+        }
+
+        // Ask for position of the attribute
+        const vertexPosAttributeLocation = gl.getAttribLocation(shaderProgram, 'vertPosition')
+
+        canvas.width = canvas.clientWidth
+        canvas.height = canvas.clientHeight
+
+        gl.clearColor(0.08, 0.08, 0.08, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+        gl.viewport(0, 0, canvas.width, canvas.height)
+
+        const tiltUniform = gl.getUniformLocation(shaderProgram, "u_tilt");
+        const fovUniform = gl.getUniformLocation(shaderProgram, "u_fov");
+        const offsetYUniform = gl.getUniformLocation(shaderProgram, "u_offsetY");
+        const scaleUniform = gl.getUniformLocation(shaderProgram, "u_scale");
+
+        gl.useProgram(shaderProgram);
+        gl.uniform1f(tiltUniform, Math.PI / 4);
+        gl.uniform1f(fovUniform, 1.3);
+        gl.uniform1f(offsetYUniform, 0.3);
+        gl.uniform1f(scaleUniform, scaleRef.current); // use dynamic scale
+
+        gl.enableVertexAttribArray(vertexPosAttributeLocation);
+        gl.vertexAttribPointer(vertexPosAttributeLocation, 2, gl.FLOAT, false, 0, 0);
+
+        gl.drawArrays(gl.POINTS, 0, dotVertices.length / 2);
+};
+
 
     const makeTriangle = () => {
         const canvas = canvasRef.current;
