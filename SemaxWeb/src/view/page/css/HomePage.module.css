@@ -42,7 +42,7 @@
 }
 
 .contentRow {
-  min-height: 100vh;
+  padding: 80px 0;
 }
 
 .primaryBackground {
@@ -54,12 +54,15 @@
 }
 
 .container {
-  flex: 1;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.home {
+  height: 100vh;
+  position: relative;
 }
 
 .innerContainer {
@@ -102,9 +105,6 @@
 
 .cardContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
-  padding: 0 156px;
 }
 
 @keyframes arrow {
@@ -124,6 +124,12 @@
 
 /* Desktop (default styles) */
 @media (min-width: 1025px) {
+  
+  .cardContainer {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    padding: 0 156px;
+  }
 
 }
 
@@ -134,5 +140,16 @@
 
 /* Mobile */
 @media (max-width: 768px) {
-  
+  .home {
+    height: 100vh;
+  }
+  .cardContainer {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 24px
+  }
+
+  .arrowDownContainer {
+    bottom: 60px;
+  }
 }

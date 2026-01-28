@@ -7,8 +7,8 @@ const HomePage = () => {
 
     return (
         <main>
-            <section className={`${classes.contentRow} ${classes.primaryBackground}`}>
-                <div className={classes.container}>
+            <section className={`${classes.primaryBackground}`}>
+                <div className={`${classes.container} ${classes.home}`}>
                     <div className={classes.innerContainer}>
                         <img className={classes.logo} src="/Semax_Logo.svg" alt="Semax Logo" width={200} />
                         <h1>SEMAX SOLUTIONS</h1>
