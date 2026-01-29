@@ -28,6 +28,12 @@ const TriangleTest = () => {
         0, 0, 255
     ]);
 
+    const randomColor = new Uint8Array([
+        Math.random() * 255,
+        Math.random() * 255,
+        Math.random() * 255
+    ]);
+
     useEffect(() => {
         makeTriangle();
     }, [])
@@ -40,72 +46,63 @@ const TriangleTest = () => {
 
         glRef.current = gl;
 
-        canvas.width = canvas.clientWidth
-        canvas.height = canvas.clientHeight
-        gl.viewport(0, 0, canvas.width, canvas.height)
-
         // (R, G, B, A) = (Red, Green, Blue, Alfa)
         gl.clearColor(0.75, 0.85, 0.8, 1.0);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-        const dotBuffer = createBuffer(gl, vertex);
+        const triangleBuffer = createBuffer(gl, vertex);
         const rgbBuffer = createBuffer(gl, rgbList);
+        const randomBuffer = createBuffer(gl, randomColor);
 
 
         const program = createProgram(gl, vertextTriangleShader, fragmentTriangleShader);
 
         // Render the frame
-        gl.clearColor(0.08, 0.08, 0.08, 1.0);
-        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
-        gl.useProgram(program);
-
         // Ask for position of the attribute
         const vertPos = gl.getAttribLocation(program, 'vertPosition')
-        const vertColor = gl.getAttribLocation(program, 'vertColor');
+        const vertColorPos = gl.getAttribLocation(program, 'vertColor');
         
         const canvasSize = gl.getUniformLocation(program, 'canvasSize')
         const shapeLocation = gl.getUniformLocation(program, 'shapeLocation')
         const shapeSize = gl.getUniformLocation(program, 'shapeSize')
 
-        gl.enableVertexAttribArray(vertPos);
-        gl.enableVertexAttribArray(vertColor);
+        const rgbTriangleBuffer = createTwoBufferVao(gl, triangleBuffer, rgbBuffer, vertPos, vertColorPos)
+        const randomTriangleBuffer = createTwoBufferVao(gl, triangleBuffer, randomBuffer, vertPos, vertColorPos)
 
-        gl.bindBuffer(gl.ARRAY_BUFFER, dotBuffer);
-        gl.vertexAttribPointer(
-            /* index: which attribute to use */
-            vertPos,
-            /* size: how many components in that attribute */
-            2,
-            /* type: wwhat is the data type stored in the GPU buffer for this attribute? */
-            gl.FLOAT,
-            /* normalized: determines how to convert ints to floats, if that's what you're doing */
-            false,
-            /* stride: how many bytes to move forward in the buffer to find the same attribute for the next vertex */
-            0,
-            /* offset: how many bytes should the input assembler skip into the buffer when reading attributes  */
-            0
-        )
+        canvas.width = canvas.clientWidth
+        canvas.height = canvas.clientHeight
+        gl.clearColor(0.08, 0.08, 0.08, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        gl.viewport(0, 0, canvas.width, canvas.height)
+
+        gl.useProgram(program);
+
+        // Set uniforms shared across frame
         gl.uniform2f(canvasSize, canvas.width, canvas.height)
 
-        gl.bindBuffer(gl.ARRAY_BUFFER, rgbBuffer);
-        gl.vertexAttribPointer(vertColor, 3, gl.UNSIGNED_BYTE, true, 0, 0);
-
+        // First triangle
         gl.uniform2f(shapeLocation, 200, 300)
         gl.uniform1f(shapeSize, 200)
-
-        // Draw call (also configures primitive assembly)
-        gl.drawArrays(
-            /* how to organize the triangles together */
-            gl.TRIANGLES, 
-            /* what is first vertex that we should look at */
-            0, 
-            /* vertices: which attribute to use */
-            vertex.length / 2
-        )
+        gl.bindVertexArray(rgbTriangleBuffer);
+        gl.drawArrays(gl.TRIANGLES, 0, vertex.length / 2)
+        
+        // Second triangle
         gl.uniform2f(shapeLocation, 600, 300)
         gl.uniform1f(shapeSize, 400)
+        gl.bindVertexArray(randomTriangleBuffer);
         gl.drawArrays(gl.TRIANGLES, 0, vertex.length / 2)
+
+        /*
+        Draw call (also configures primitive assembly)
+        gl.drawArrays(
+            how to organize the triangles together
+            gl.TRIANGLES, 
+            what is first vertex that we should look at
+            0, 
+            vertices: which attribute to use
+            vertex.length / 2
+        )
+        */
     }
 
     const getContext = (canvas: HTMLCanvasElement) => {
@@ -159,6 +156,52 @@ const TriangleTest = () => {
         }
         return shader;
 
+    }
+
+    // VAO = Vertex Array Object
+    const createTwoBufferVao = (
+        gl: WebGL2RenderingContext, 
+        vertices: WebGLBuffer, colors: WebGLBuffer,
+        posAttribLocation: number, colorAttribLocationPos: number
+    ) => {
+        const vao = gl.createVertexArray();
+
+        if(!vao) throw new Error("Failed to create VAO");
+
+        // Bind the VAO so we can setup its attrib pointers and buffers
+        gl.bindVertexArray(vao);
+
+        // Enable the attribute locations
+        gl.enableVertexAttribArray(posAttribLocation);
+        gl.enableVertexAttribArray(colorAttribLocationPos);
+
+        // Bind the buffers and setup the attribute pointers
+        gl.bindBuffer(gl.ARRAY_BUFFER, vertices);
+        gl.vertexAttribPointer(posAttribLocation, 2, gl.FLOAT, false, 0, 0);
+
+        // Bind the color buffer and setup the attribute pointer
+        gl.bindBuffer(gl.ARRAY_BUFFER, colors);
+        gl.vertexAttribPointer(colorAttribLocationPos, 3, gl.UNSIGNED_BYTE, true, 0, 0);
+
+        gl.bindVertexArray(null);
+        return vao;
+
+        /* 
+        gl.vertexAttribPointer(
+            index: which attribute to use
+            vertPos,
+            size: how many components in that attribute
+            2,
+            type: wwhat is the data type stored in the GPU buffer for this attribute?
+            gl.FLOAT,
+            normalized: determines how to convert ints to floats, if that's what you're doing
+            false,
+            stride: how many bytes to move forward in the buffer to find the same attribute for the next vertex
+            0,
+            offset: how many bytes should the input assembler skip into the buffer when reading attributes
+            0
+        )
+        */
     }
 
     return (

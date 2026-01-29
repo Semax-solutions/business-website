@@ -176,6 +176,7 @@ const TestPage = () => {
     }
 
 
+
     useEffect(() => {
         initWebGL();
     }, [])
