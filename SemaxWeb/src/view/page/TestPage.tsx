@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import classes from './css/TestPage.module.css'
+import vertexShaderSourceCode from './shader/vertex_shader.glsl?raw'
+import fragmentShaderSourceCode from './shader/fragment_shader.glsl?raw'
 
 const TestPage = () => {
     const canvasRef = useRef<null | HTMLCanvasElement>(null);
@@ -11,53 +13,6 @@ const TestPage = () => {
 
 
     const scaleRef = useRef<number>(0.65);
-
-
-    const vertexShaderSourceCode = `#version 300 es
-    precision mediump float;
-
-    //Two Floating point in it: X, Y
-    in vec2 vertPosition;
-    uniform float u_tilt;     // backward tilt
-    uniform float u_fov;      // perspective
-    uniform float u_offsetY;  // shift grid up
-    uniform float u_scale;    // shrink grid
-
-    void main() {
-        // scale first
-        float x = vertPosition.x * u_scale;
-        float y = vertPosition.y * u_scale;
-        float z = 0.0;
-
-        // rotate backward around X-axis
-        float cosA = cos(u_tilt);
-        float sinA = sin(u_tilt);
-        float yRot = y * cosA - z * sinA;
-        float zRot = y * sinA + z * cosA;
-
-        // move grid up
-        yRot += u_offsetY;
-
-        // perspective projection
-        float scale = u_fov / (u_fov + zRot);
-        vec2 projected = vec2(x * scale, yRot * scale);
-
-        gl_Position = vec4(projected, 0.0, 1.0);
-        gl_PointSize = 5.0; // visible dots
-    }`;
-
-    const fragmentShaderSourceCode = `#version 300 es
-    precision mediump float;
-
-    out vec4 outputColor;
-
-    void main() {
-        // (R, G, B, A)
-        outputColor = vec4(0.294, 0.0, 0.51, 1.0);
-        // outputColor = vec4(0.373, 0.620, 0.627, 1.0);
-        // outputColor = vec4(0.2902, 0.4863, 0.4941, 1.0);
-    }`;
-
 
     const makeDotsArraylist = (width: number, height: number, spacing = 10) => {
         // WebGL expects coordinates in normalized device coordinates [-1, 1]
@@ -110,6 +65,7 @@ const TestPage = () => {
         const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSourceCode);
 
         const shaderProgram = createProgram(gl, [vertexShader, fragmentShader])
+        startRenderLoop(gl, shaderProgram)
 
     }
 
@@ -125,6 +81,27 @@ const TestPage = () => {
         return shader;
 
     }
+
+    const startRenderLoop = (
+        gl: WebGL2RenderingContext,
+        program: WebGLProgram
+    ) => {
+        const timeLoc = gl.getUniformLocation(program, "u_time");
+        let start = performance.now();
+
+        function render() {
+            const t = (performance.now() - start) * 0.001;
+            gl.uniform1f(timeLoc, t);
+
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+            gl.drawArrays(gl.POINTS, 0, glVertexCountRef.current);
+
+            requestAnimationFrame(render);
+        }
+
+        render();
+    };
+
 
     const createProgram = (gl: WebGL2RenderingContext, shaders: WebGLShader[]) => {
         const shaderProgram = gl.createProgram();
