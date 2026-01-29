@@ -4,6 +4,32 @@ import classes from './css/TestPage.module.css'
 import vertextTriangleShader from './shader/triangle.vert.glsl?raw'
 import fragmentTriangleShader from './shader/triangle.frag.glsl?raw'
 
+
+class MovingShape {
+    public position: [number, number];
+    public velocity: [number, number];
+    public size: number;
+    public vao: WebGLVertexArrayObject;
+
+    constructor(
+        position: [number, number],
+        velocity: [number, number],
+        size: number,
+        vao: WebGLVertexArrayObject
+    ) {
+        this.position = position;
+        this.velocity = velocity;
+        this.size = size;
+        this.vao = vao;
+    }
+
+    update(dt: number) {
+        this.position[0] += this.velocity[0] * dt;
+        this.position[1] += this.velocity[1] * dt;
+    }
+}
+
+
 const TriangleTest = () => {
     const canvasRef = useRef<null | HTMLCanvasElement>(null);
 
@@ -33,6 +59,7 @@ const TriangleTest = () => {
         Math.random() * 255,
         Math.random() * 255
     ]);
+
 
     useEffect(() => {
         makeTriangle();
@@ -69,40 +96,53 @@ const TriangleTest = () => {
         const rgbTriangleBuffer = createTwoBufferVao(gl, triangleBuffer, rgbBuffer, vertPos, vertColorPos)
         const randomTriangleBuffer = createTwoBufferVao(gl, triangleBuffer, randomBuffer, vertPos, vertColorPos)
 
-        canvas.width = canvas.clientWidth
-        canvas.height = canvas.clientHeight
-        gl.clearColor(0.08, 0.08, 0.08, 1.0);
-        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        gl.viewport(0, 0, canvas.width, canvas.height)
+        const shapes: MovingShape[] = [
+            new MovingShape([200, 300], [50, 5], 200, rgbTriangleBuffer),
+            new MovingShape([600, 300], [-50, 5], 400, randomTriangleBuffer)
+        ];
 
-        gl.useProgram(program);
-
-        // Set uniforms shared across frame
-        gl.uniform2f(canvasSize, canvas.width, canvas.height)
-
-        // First triangle
-        gl.uniform2f(shapeLocation, 200, 300)
-        gl.uniform1f(shapeSize, 200)
-        gl.bindVertexArray(rgbTriangleBuffer);
-        gl.drawArrays(gl.TRIANGLES, 0, vertex.length / 2)
         
-        // Second triangle
-        gl.uniform2f(shapeLocation, 600, 300)
-        gl.uniform1f(shapeSize, 400)
-        gl.bindVertexArray(randomTriangleBuffer);
-        gl.drawArrays(gl.TRIANGLES, 0, vertex.length / 2)
+        let lastFrameTime = performance.now();
+        const renderFrame = () => {
+            const now = performance.now();
+            const dt = (now - lastFrameTime) / 1000;
+            lastFrameTime = now;
+            
+            // Update shape positions
+            shapes.forEach(shape => shape.update(dt));
 
-        /*
-        Draw call (also configures primitive assembly)
-        gl.drawArrays(
-            how to organize the triangles together
-            gl.TRIANGLES, 
-            what is first vertex that we should look at
-            0, 
-            vertices: which attribute to use
-            vertex.length / 2
-        )
-        */
+            canvas.width = canvas.clientWidth
+            canvas.height = canvas.clientHeight
+            gl.clearColor(0.08, 0.08, 0.08, 1.0);
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+            gl.viewport(0, 0, canvas.width, canvas.height)
+
+            gl.useProgram(program);
+
+            // Set uniforms shared across frame
+            gl.uniform2f(canvasSize, canvas.width, canvas.height)
+
+            for(const shape of shapes) {
+                gl.uniform2f(shapeLocation, shape.position[0], shape.position[1])
+                gl.uniform1f(shapeSize, shape.size)
+                gl.bindVertexArray(shape.vao);
+                gl.drawArrays(gl.TRIANGLES, 0, vertex.length / 2)
+            }
+
+            requestAnimationFrame(renderFrame);
+            /*
+            Draw call (also configures primitive assembly)
+            gl.drawArrays(
+                how to organize the triangles together
+                gl.TRIANGLES, 
+                what is first vertex that we should look at
+                0, 
+                vertices: which attribute to use
+                vertex.length / 2
+            )
+            */
+        }
+        requestAnimationFrame(renderFrame);
     }
 
     const getContext = (canvas: HTMLCanvasElement) => {
@@ -203,6 +243,7 @@ const TriangleTest = () => {
         )
         */
     }
+
 
     return (
         <div style={{marginTop: '80px'}}>
