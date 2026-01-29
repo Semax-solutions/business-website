@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import classes from './css/TestPage.module.css'
 import vertexShaderSourceCode from './shader/vertex_shader.glsl?raw'
 import fragmentShaderSourceCode from './shader/fragment_shader.glsl?raw'
+import vertextTriangleShader from './shader/triangle.vert.glsl?raw'
+import fragmentTriangleShader from './shader/triangle.frag.glsl?raw'
 
 const TestPage = () => {
     const canvasRef = useRef<null | HTMLCanvasElement>(null);
@@ -175,24 +177,113 @@ const TestPage = () => {
         )
     }
 
+    const makeTriangle = () => {
+        const canvas = canvasRef.current;
+        if(canvas === null) return;
+        const gl = canvas.getContext('webgl2')
+        if(!gl) {
+            console.error("Cannot open canvas")
+            return;
+        }
+
+        glRef.current = gl;
+        const vertex = [
+            0.0, 0.5,
+            0.5, -0.5,
+            -0.5, -0.5
+        ]
+        canvas.width = canvas.clientWidth
+        canvas.height = canvas.clientHeight
+        gl.viewport(0, 0, canvas.width, canvas.height)
+
+        // (R, G, B, A) = (Red, Green, Blue, Alfa)
+        gl.clearColor(0.75, 0.85, 0.8, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+        // Gpu like to use a 32bit float and javascript uses a 64bit float 
+        // that why we use a 32bit float array
+        const triangleVertices = new Float32Array(vertex);
+
+        const dotBuffer = gl.createBuffer();
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, dotBuffer)
+        gl.bufferData(gl.ARRAY_BUFFER, triangleVertices, gl.STATIC_DRAW)
+
+        glBufferRef.current = dotBuffer;
+
+        const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertextTriangleShader);
+        const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentTriangleShader);
+
+        const program = createProgram(gl, [vertexShader, fragmentShader])
+
+
+        // Render the frame
+        gl.clearColor(0.08, 0.08, 0.08, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+        gl.useProgram(program);
+        
+        const canvasSize = gl.getUniformLocation(program, 'canvasSize')
+        const shapeLocation = gl.getUniformLocation(program, 'shapeLocation')
+        const shapeSize = gl.getUniformLocation(program, 'shapeSize')
+
+        // Ask for position of the attribute
+        const vertPos = gl.getAttribLocation(program, 'vertPosition')
+
+        gl.enableVertexAttribArray(vertPos);
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, dotBuffer);
+        gl.vertexAttribPointer(
+            /* index: which attribute to use */
+            vertPos,
+            /* size: how many components in that attribute */
+            2,
+            /* type: wwhat is the data type stored in the GPU buffer for this attribute? */
+            gl.FLOAT,
+            /* normalized: determines how to convert ints to floats, if that's what you're doing */
+            false,
+            /* stride: how many bytes to move forward in the buffer to find the same attribute for the next vertex */
+            0,
+            /* offset: how many bytes should the input assembler skip into the buffer when reading attributes  */
+            0
+        )
+
+        gl.uniform2f(canvasSize, canvas.width, canvas.height)
+        gl.uniform2f(shapeLocation, 200, 300)
+        gl.uniform1f(shapeSize, 200)
+        // Draw call (also configures primitive assembly)
+        gl.drawArrays(
+            /* how to organize the triangles together */
+            gl.TRIANGLES, 
+            /* what is first vertex that we should look at */
+            0, 
+            /* vertices: which attribute to use */
+            vertex.length / 2
+        )
+        gl.uniform2f(shapeLocation, 600, 300)
+        gl.uniform1f(shapeSize, 400)
+        gl.drawArrays(gl.TRIANGLES, 0, vertex.length / 2)
+    }
+
 
     useEffect(() => {
-        // makeTriangle();
-        initWebGL();
+        makeTriangle();
+        // initWebGL();
+
     }, [])
 
-    useEffect(() => {
-        const handleWheel = (e: WheelEvent) => {
-            e.preventDefault();
-            // Change scale by scroll direction
-            scaleRef.current += e.deltaY * -0.001; // scroll up → bigger, scroll down → smaller
-            scaleRef.current = Math.min(Math.max(scaleRef.current, 0.1), 2.0); // clamp 0.1..2
-            drawDots(); // redraw with new scale
-        };
+    // useEffect(() => {
+    //     const handleWheel = (e: WheelEvent) => {
+    //         e.preventDefault();
+    //         // Change scale by scroll direction
+    //         scaleRef.current += e.deltaY * -0.001; // scroll up → bigger, scroll down → smaller
+    //         scaleRef.current = Math.min(Math.max(scaleRef.current, 0.1), 2.0); // clamp 0.1..2
+    //         drawDots(); // redraw with new scale
+    //     };
 
-        window.addEventListener("wheel", handleWheel, { passive: false });
-        return () => window.removeEventListener("wheel", handleWheel);
-    }, []);
+    //     window.addEventListener("wheel", handleWheel, { passive: false });
+    //     return () => window.removeEventListener("wheel", handleWheel);
+    // }, []);
 
     return (
         <div style={{marginTop: '80px'}}>
