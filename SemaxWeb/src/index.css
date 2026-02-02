@@ -1,7 +1,9 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Font settings */
+  font-family: 'Inter', sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  font-display: "Outfit", sans-serif;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -25,6 +27,19 @@
   --accent-color-complementary: #A8D5BA;
   --accent-color-neutral: #708090;
   --accent-color-clean: #FFFFFF;
+
+  /* Dark Mode Colors */
+  --primary-dark-color-main: #4A9FA0;
+  --primary-dark-color-header: #5FB4B5;
+  --primary-dark-color-background: #2A4D4E;
+
+  --secondary-dark-color-highligts: #F5A074;
+  --secondary-dark-color-background: #2A2520;
+  --secondary-dark-color-text: #E8E6E0;
+
+  --accent-dark-color-complementary: #6FD890;
+  --accent-dark-color-neutral: #8A95A5;
+  --accent-dark-color-clean: #121212;
 
 }
 
