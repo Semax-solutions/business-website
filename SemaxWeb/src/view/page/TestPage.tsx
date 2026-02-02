@@ -19,13 +19,19 @@ const TestPage = () => {
         const verticesPoints: number[] = [];
 
         for (let y = 0; y < height; y += spacing) {
-            for (let x = 0; x < width; x += spacing) {
-                // Convert pixel coordinates to WebGL coordinates
-                const xGl = (x / width) * 2 - 1; // 0..width -> -1..1
-                const yGl = -((y / height) * 2 - 1); // flip Y for WebGL coords
+            const yGl = -((y / height) * 2 - 1); // flip Y for WebGL coords
+            // Scale width: narrower at top, full width at bottom
+            const t = y / height; // 0 = top, 1 = bottom
+            const halfWidthAtY = 1.8 + t * 0.1; // minimum width at top 0.05, max 1 at bottom
+            const leftX = -halfWidthAtY;
+            const rightX = halfWidthAtY;
+
+            const step = (spacing / width) * 2; // step in normalized coords
+            for (let xGl = leftX; xGl <= rightX; xGl += step) {
                 verticesPoints.push(xGl, yGl);
             }
         }
+        console.log(verticesPoints.length)
 
         return new Float32Array(verticesPoints);
     };
@@ -140,7 +146,7 @@ const TestPage = () => {
 
         gl.uniform1f(tiltUniform, Math.PI / 4);         // 45° backward tilt
         gl.uniform1f(fovUniform, 1.3);                  // controls perspective
-        gl.uniform1f(offsetYUniform, 0.3);              // shift grid up
+        gl.uniform1f(offsetYUniform, 0.2);              // shift grid up
         gl.uniform1f(scaleUniform, scaleRef.current);   // shrink grid
 
         // Ask for position of the attribute
