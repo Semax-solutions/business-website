@@ -135,7 +135,18 @@
 
 /* Tablet */
 @media (max-width: 1024px) {
+  .home {
+    height: 100vh;
+  }
+  .cardContainer {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 24px
+  }
 
+  .arrowDownContainer {
+    bottom: 60px;
+  }
 }
 
 /* Mobile */
