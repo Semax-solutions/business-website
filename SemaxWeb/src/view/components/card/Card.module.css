@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    color: black;
+    color: var(--h4-color);
     border: 1px oklch(0.97 0.01 -3 / 1) solid;
     padding: 32px;
     border-radius: 10px;
