@@ -42,7 +42,7 @@ const HomePage = () => {
             <section className={`${classes.contentRow} ${classes.whiteBackground}`}>
                 <div className={classes.container}>
                     <h1>About us</h1>
-                    <div>
+                    <div className={classes.AboutUsContainer}>
                         {/* <p className={classes.about}>
                             We are a full-stack software company specializing in custom built digital solutions. 
                             We design and develop software that is tailored to the specific needs of each business no off-the-shelf products, no unnecessary complexity.
@@ -53,6 +53,9 @@ const HomePage = () => {
                         <p className={classes.about}>
                             We are a full-stack software and IT consultancy company. With a strong background in software development, we create custom software solutions and provide strategic IT guidance tailored to your business.
                         </p>
+                        <div className={classes.imgTemp}>
+                            
+                        </div>
                     </div>
                 </div>
             </section>
