@@ -3,12 +3,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    color: var(--h4-color);
+    color: var(--h-color);
     border: 1px oklch(0.97 0.01 -3 / 1) solid;
     padding: 32px;
     border-radius: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     cursor: pointer;
+    background-color: var(--accent-color-clean);
 }
 
 .icon {
@@ -42,10 +43,11 @@
 .title {
     font-size: 1.2rem;
     margin: 0 0 12px 0;
+    color: var(--secondary-color-text)
 }
 
 .description {
-    color: var(--secondary-color-text);
+    color: var(--accent-color-neutral);
     font-weight: 600;
     margin: 0;
 }
