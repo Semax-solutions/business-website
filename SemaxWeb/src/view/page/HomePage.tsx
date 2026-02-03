@@ -30,12 +30,11 @@ const HomePage = () => {
                 <div className={classes.container}>
                     <h1 style={{color: 'black'}}>Our services</h1>
                     <div className={classes.cardContainer}>
-                        <Card icon={<CodeIcon />} title='Software Development' description='From dynamic, responsive front-end interfaces using JavaScript, TypeScript, HTML, and CSS to powerful back-end solutions in Java, Go, and Python, we build websites and web'/>
-                        <Card icon={<DbIcon />} title='IT Strategy & Architecture' description='From dynamic, responsive front-end interfaces using JavaScript, TypeScript, HTML, and CSS to powerful back-end solutions in Java, Go, and Python, we build websites and web'/>
-                        {/* <Card icon={<DbIcon />} title='Data' description='From dynamic, responsive front-end interfaces using JavaScript, TypeScript, HTML, and CSS to powerful back-end solutions in Java, Go, and Python, we build websites and web'/> */}
-                        <Card icon={<DbIcon />} title='Data & Api Integration' description='From dynamic, responsive front-end interfaces using JavaScript, TypeScript, HTML, and CSS to powerful back-end solutions in Java, Go, and Python, we build websites and web'/>
-                        <Card icon={<DbIcon />} title='Management Services' description='From dynamic, responsive front-end interfaces using JavaScript, TypeScript, HTML, and CSS to powerful back-end solutions in Java, Go, and Python, we build websites and web'/>
-                        <Card icon={<DbIcon />} title='IT Consultency' description='From dynamic, responsive front-end interfaces using JavaScript, TypeScript, HTML, and CSS to powerful back-end solutions in Java, Go, and Python, we build websites and web'/>
+                        <Card icon={<CodeIcon />} title='Software Development' description='From dynamic, responsive front-end interfaces using JavaScript, TypeScript, HTML, and CSS to powerful back-end solutions in Java, C#, and SQL, we build websites and web tailored to your needs.'/>
+                        <Card icon={<DbIcon />} title='IT Strategy & Architecture' description='Strategic planning and architectural design to align your technology infrastructure with business objectives. We create scalable, secure and efficient IT code that support your long-term growth and digital transformation.'/>
+                        <Card icon={<DbIcon />} title='Data & Api Integration' description='Seamlessly connect your systems and applications through robust APIs and data integrations and automated data pipelines. We enable real-time data synchronization, streamline workflows, and unlock the full potential of your business data.'/>
+                        <Card icon={<DbIcon />} title='Management Services' description='Comprehensive IT management and support services to keep your systems running smoothly. From monitoring and maintenance to security updates and performance optimization, we ensure your technology infrastructure operates at peak efficiency.'/>
+                        <Card icon={<DbIcon />} title='IT Consultency' description='Expert guidance and strategic advice to navigate complex technology decisions. Our consultants provide actionable insights on digital transformation, technology selection, security best practices, and optimization strategies to drive business success.'/>
                     </div>
                 </div>
             </section>
