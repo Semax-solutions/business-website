@@ -98,6 +98,10 @@ h1 {
 .cardContainer {
   display: grid;
 }
+.about {
+  color: var(--accent-color-neutral);
+  font-size: 1.25rem;
+}
 
 @keyframes arrow {
   0% {

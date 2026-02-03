@@ -43,7 +43,16 @@ const HomePage = () => {
                 <div className={classes.container}>
                     <h1>About us</h1>
                     <div>
-
+                        {/* <p className={classes.about}>
+                            We are a full-stack software company specializing in custom built digital solutions. 
+                            We design and develop software that is tailored to the specific needs of each business no off-the-shelf products, no unnecessary complexity.
+                            With a strong background in software development, we combine technical expertise with strategic IT consultancy. 
+                            This allows us to not only build reliable and scalable applications, but also advise on architecture, technology choices, and long-term digital strategy.
+                            From modern front-end interfaces to robust back-end systems and integrations, we work closely with our clients to turn ideas into practical, high-quality software that supports real business goals.
+                        </p> */}
+                        <p className={classes.about}>
+                            We are a full-stack software and IT consultancy company. With a strong background in software development, we create custom software solutions and provide strategic IT guidance tailored to your business.
+                        </p>
                     </div>
                 </div>
             </section>
