@@ -5,6 +5,8 @@
     align-items: flex-start;
     color: var(--h-color);
     border: 1px oklch(0.97 0.01 -3 / 1) solid;
+    /* darkmode */
+    /* border: 1px oklch(0.03 0.01 177 / 1) solid; */
     padding: 32px;
     border-radius: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -19,6 +21,8 @@
     width: 56px;
     height: 56px;
     background-color: oklch(.984 .014 180.72);
+    /* darkmode */
+    /* background-color: oklch(0.016 0.014 0.72); */
     margin-bottom: 20px;
     border-radius: 8px;
 }
