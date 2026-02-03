@@ -34,7 +34,8 @@
 
 .link {
     display: inline-block;
-    color: var(--secondary-color-highligts);
+    /* color: var(--secondary-color-highligts); */
+    color: rgba(255, 255, 255, 0.87);
     text-decoration: none;
     transition: transform 0.3s ease;
 }
