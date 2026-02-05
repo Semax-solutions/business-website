@@ -53,6 +53,12 @@ const Footer = () => {
                     <p>
                         Software development
                         <br></br>
+                        IT Strategy & Architecture
+                        <br></br>
+                        Data & API Integration
+                        <br></br>
+                        Management Services
+                        <br></br>
                         IT consulting
                         <br></br>
                     </p>

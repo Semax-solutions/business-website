@@ -1,7 +1,9 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Font settings */
+  font-family: 'Inter', sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  font-display: "Outfit", sans-serif;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -26,7 +28,28 @@
   --accent-color-neutral: #708090;
   --accent-color-clean: #FFFFFF;
 
+  --h-color: #000000;
+
+
 }
+
+/* system prefers dark */
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color-main: #4A9FA0;
+    --primary-color-header: #5FB4B5;
+    --primary-color-background: #2A4D4E;
+
+    --secondary-color-highligts: #F5A074;
+    --secondary-color-background: #2A2520;
+    --secondary-color-text: #E8E6E0;
+
+    --accent-color-complementary: #6FD890;
+    --accent-color-neutral: #8A95A5;
+    --accent-color-clean: #121212;
+    --h-color: #000000;
+  }
+} */
 
 a {
   /* font-weight: 500; */

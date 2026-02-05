@@ -34,7 +34,8 @@
 
 .link {
     display: inline-block;
-    color: var(--secondary-color-highligts);
+    /* color: var(--secondary-color-highligts); */
+    color: rgba(255, 255, 255, 0.87);
     text-decoration: none;
     transition: transform 0.3s ease;
 }
@@ -108,6 +109,28 @@
 
 /* Tablet */
 @media (max-width: 1024px) {
+    .footer {
+        padding: 64px 32px 64px;
+    }
+
+    .footerContainer {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr;
+    }
+
+    .logo {
+        grid-column: 1 / 3;
+    }
+
+    .footerBottomContainer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: left;
+    }
+
+    .policyLinks {
+        grid-template-rows: 1fr 1fr 1fr;
+    }
 
 }
 
