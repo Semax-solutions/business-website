@@ -1,11 +1,26 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import classes from './css/HomePage.module.css'
 import Card from '../components/card/Card'
 import { CodeIcon, DbIcon } from '../../assets/Services';
+import { useLocation } from 'react-router-dom';
 
 const HomePage = () => {
     const servicesRef = useRef<null | HTMLElement>(null)
+    const location = useLocation();
 
+    //scroll to section if url contains hash
+    useEffect(() => {
+        if (location.hash) {
+        const id = location.hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+        }else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [location]);
+    
     return (
         <main>
             <section className={`${classes.primaryBackground}`}>
@@ -26,7 +41,7 @@ const HomePage = () => {
                 </div>
             </section>
 
-            <section ref={servicesRef} className={`${classes.contentRow} ${classes.cleanBackground}`}>
+            <section id='services' ref={servicesRef} className={`${classes.contentRow} ${classes.cleanBackground}`}>
                 <div className={classes.container}>
                     <h1>Our services</h1>
                     <div className={classes.cardContainer}>
@@ -39,7 +54,7 @@ const HomePage = () => {
                 </div>
             </section>
 
-            <section className={`${classes.contentRow} ${classes.whiteBackground}`}>
+            <section id='about' className={`${classes.contentRow} ${classes.whiteBackground}`}>
                 <div className={classes.container}>
                     <h1>About us</h1>
                     <div className={classes.AboutUsContainer}>

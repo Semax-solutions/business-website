@@ -131,11 +131,25 @@ h1 {
 
 }
 
-/* Desktop (default styles) */
+
+/* 
+Desktop (default styles) 
+NOTE! for bigger desktop sizes add the bigger size underneath the one smaller before 
+*/
 @media (min-width: 1025px) {
   
   .cardContainer {
     grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+
+}
+
+/* Desktop (1440p styles) */
+@media (min-width: 1800px) {
+  
+  .cardContainer {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 20px;
   }
 
