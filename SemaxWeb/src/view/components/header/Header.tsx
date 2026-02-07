@@ -12,9 +12,9 @@ const Header = () => {
 
                 <nav className={classes.nav}>
                     <NavButton path='/home'>Home</NavButton>
-                    <NavButton path='/services'>Services</NavButton>
-                    <NavButton path='/about'>About</NavButton>
-                    <NavButton path='/contact'>Contact</NavButton>
+                    <NavButton path='/home#services'>Services</NavButton>
+                    <NavButton path='/home#about'>About</NavButton>
+                    <NavButton path='/home#footer-contact'>Contact</NavButton>
                 </nav>
 
                 <div className={`${classes.menu} ${isMenuOpen ? classes.menuOpen : ''}`}>
@@ -23,13 +23,13 @@ const Header = () => {
                             <NavButton path='/home'>Home</NavButton>
                         </div>
                         <div className={classes.menuItem}>
-                            <NavButton path='/services'>Services</NavButton>
+                            <NavButton path='/home#services'>Services</NavButton>
                         </div>
                         <div className={classes.menuItem}>
-                            <NavButton path='/about'>About</NavButton>
+                            <NavButton path='/home#about'>About</NavButton>
                         </div>
                         <div className={classes.menuItem}>
-                            <NavButton path='/contact'>Contact</NavButton>
+                            <NavButton path='/home#footer-contact'>Contact</NavButton>
                         </div>
                     </nav>
                 </div>

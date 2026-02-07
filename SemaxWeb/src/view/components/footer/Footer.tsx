@@ -7,7 +7,7 @@ const Footer = () => {
             <div className={classes.footerContainer}>
                 <img className={classes.logo} alt='Company logo' src='/Header_logo.png'></img>
 
-                <div className={classes.contact}>
+                <div id='footer-contact' className={classes.contact}>
                     <p className={classes.titleInfo}>Contact</p>
                     <p>
                         Semax Solutions
