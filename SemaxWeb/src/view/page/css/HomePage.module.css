@@ -146,7 +146,7 @@ NOTE! for bigger desktop sizes add the bigger size underneath the one smaller be
 }
 
 /* Desktop (1440p styles) */
-@media (min-width: 1800px) {
+@media (min-width: 1921px) {
   
   .cardContainer {
     grid-template-columns: 1fr 1fr 1fr 1fr;
