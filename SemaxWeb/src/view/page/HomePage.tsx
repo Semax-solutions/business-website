@@ -74,6 +74,15 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
+
+            <section id='partners' className={`${classes.contentRow} ${classes.cleanBackground}`}>
+                <div className={classes.container}>
+                    <h1>Our partners</h1>
+                    <div className={classes.partnersContainer}>
+                        <img src="/Mierij_Meteo.png" alt="Mierij Meteo logo" width={400} />
+                    </div>
+                </div>
+            </section>
             
         </main>
     )

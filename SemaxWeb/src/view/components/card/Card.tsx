@@ -13,7 +13,7 @@ const Card = ({ icon, title, description }: CardProps) => {
             variants={cardVariants}
             initial="offscreen"
             whileInView="onscreen"
-            viewport={{ once: true, amount: 0.7 }}
+            viewport={{ once: true, amount: 0.6 }}
         >
           <div className={classes.card}>
               <div className={classes.icon}>
