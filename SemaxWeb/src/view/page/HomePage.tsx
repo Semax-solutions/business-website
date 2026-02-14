@@ -3,6 +3,7 @@ import classes from './css/HomePage.module.css'
 import Card from '../components/card/Card'
 import { CodeIcon, DbIcon, ApiIcon } from '../../assets/Services';
 import { useLocation } from 'react-router-dom';
+import PartnerCard from '../components/partner_display/partner_card';
 
 const HomePage = () => {
     const servicesRef = useRef<null | HTMLElement>(null)
@@ -79,7 +80,7 @@ const HomePage = () => {
                 <div className={classes.container}>
                     <h1>Our partners</h1>
                     <div className={classes.partnersContainer}>
-                        <img src="/Mierij_Meteo.png" alt="Mierij Meteo logo" width={400} />
+                        <PartnerCard />
                     </div>
                 </div>
             </section>
