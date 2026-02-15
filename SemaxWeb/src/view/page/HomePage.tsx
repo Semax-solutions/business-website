@@ -79,8 +79,8 @@ const HomePage = () => {
             <section id='partners' className={`${classes.contentRow} ${classes.cleanBackground}`}>
                 <div className={classes.container}>
                     <h1>Our partners</h1>
-                    <div className={classes.partnersContainer}>
-                        <PartnerCard />
+                    <div className={classes.partnerContainer}>
+                        <PartnerCard logoUrl="/Mierij_Meteo.png" name="Mierij Meteo" description="Specialized in meteorological data and systems." link='https://mierijmeteonl.nl/'/>
                     </div>
                 </div>
             </section>

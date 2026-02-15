@@ -98,6 +98,7 @@ h1 {
 .cardContainer {
   display: grid;
 }
+
 .about {
   color: var(--accent-color-neutral);
   font-size: 1.25rem;
@@ -129,6 +130,14 @@ h1 {
     transform: translate(0px, 0);
   }
 
+}
+
+.partnerContainer {
+  width: stretch;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 300fr));
+  gap: 10px;
 }
 
 

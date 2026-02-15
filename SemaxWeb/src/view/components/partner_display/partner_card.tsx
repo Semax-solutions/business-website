@@ -1,25 +1,29 @@
 import styles from './partner_card.module.css';
 
-export default function PartnerCard() {
+interface PartnerProps {
+  logoUrl: string;
+  name: string;
+  description: string;
+  link?: string;
+}
+
+export default function PartnerCard({logoUrl, name, description, link}: PartnerProps) {
+  
+
+
   return (
     <div className={styles.container}>
-      <div className={styles.card}>
-        {/* Partner Logo Container */}
+      <div className={styles.card} onClick={() => link && window.open(link, '_blank')}>
         <div className={styles.logoContainer}>
-          {/* Placeholder logo - replace with actual partner logo */}
-          <div className={styles.logoPlaceholder}>
-            PARTNER
-          </div>
+            <img src={logoUrl} alt={name + " logo"} className={styles.logo} />
         </div>
 
-        {/* Partner Name */}
         <h3 className={styles.partnerName}>
-          Partner Name
+          {name}
         </h3>
 
-        {/* Partner Description */}
         <p className={styles.partnerDescription}>
-          Technology Partner
+          {description}
         </p>
       </div>
     </div>
