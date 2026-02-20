@@ -3,6 +3,8 @@ import classes from './css/HomePage.module.css'
 import Card from '../components/card/Card'
 import { CodeIcon, DbIcon, ApiIcon } from '../../assets/Services';
 import { useLocation } from 'react-router-dom';
+import PartnerCard from '../components/partner_display/partner_card';
+import TypingEffect from '../components/text_animations/typing_effect';
 
 const HomePage = () => {
     const servicesRef = useRef<null | HTMLElement>(null)
@@ -66,11 +68,22 @@ const HomePage = () => {
                             From modern front-end interfaces to robust back-end systems and integrations, we work closely with our clients to turn ideas into practical, high-quality software that supports real business goals.
                         </p> */}
                         <p className={classes.about}>
-                            We are a full-stack software and IT consultancy company. With a strong background in software development, we create custom software solutions and provide strategic IT guidance tailored to your business.
+                            <TypingEffect speed={0.01}>
+                                We are a full-stack software and IT consultancy company. With a strong background in software development, we create custom software solutions and provide strategic IT guidance tailored to your business.
+                            </TypingEffect>
                         </p>
                         <div className={classes.imgTemp}>
                             
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id='partners' className={`${classes.contentRow} ${classes.cleanBackground}`}>
+                <div className={classes.container}>
+                    <h1>Our partners</h1>
+                    <div className={classes.partnerContainer}>
+                        <PartnerCard logoUrl="/Mierij_Meteo.png" name="Mierij Meteo" description="Specialized in meteorological data and systems." link='https://mierijmeteonl.nl/'/>
                     </div>
                 </div>
             </section>
