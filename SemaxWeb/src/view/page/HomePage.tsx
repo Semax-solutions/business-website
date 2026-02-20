@@ -73,7 +73,7 @@ const HomePage = () => {
                             </TypingEffect>
                         </p>
                         <div className={classes.imgTemp}>
-                            
+                            <img src='/Owner-semax.jpg' alt='Owners of Semax' className={classes.img}></img>
                         </div>
                     </div>
                 </div>
