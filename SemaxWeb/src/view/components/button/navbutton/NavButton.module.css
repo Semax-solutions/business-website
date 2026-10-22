@@ -1,11 +1,56 @@
-.text {
-    text-decoration: none;
-    color: var(--accent-color-clean, white);
-    font-size: 18px;
-    margin: 0;
+.link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: var(--color-text-on-dark);
+    font-weight: 500;
 }
 
-.text:hover {
-    color: var(--secondary-color-text);
-    transition: .25s;
+/* Desktop header link with a sliding coral underline */
+.bar {
+    font-size: var(--text-sm);
+}
+
+.bar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.45rem;
+    height: 2px;
+    border-radius: 2px;
+    background-color: var(--color-coral);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s var(--ease-out);
+}
+
+.bar:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Large stacked link in the mobile menu (the header adds the number and arrow) */
+.menu {
+    width: 100%;
+    min-height: 4.5rem;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    font-family: var(--font-display);
+    font-size: clamp(1.625rem, 1.4rem + 1vw, 2rem);
+    letter-spacing: -0.01em;
+    transition: color 0.2s ease;
+}
+
+/* hover only where there is a real pointer, so a tap doesn't leave the hover state stuck on */
+@media (hover: hover) {
+    .bar:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    .menu:hover {
+        color: var(--color-coral-200);
+    }
 }
