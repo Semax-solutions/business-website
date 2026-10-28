@@ -17,7 +17,7 @@ public class MailDelivery {
     @Column(name = "mail_error", length = 500)
     private String error;
 
-    @Column(name = "mail_sent_at", nullable = false)
+    @Column(name = "mail_sent_at")
     private Instant sentAt;
 
     protected MailDelivery() {}
