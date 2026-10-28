@@ -15,6 +15,6 @@ public class MessageEventListener {
 
     @EventListener
     public void handleMessage(MessageEvent event) {
-        System.out.println(event);
+        mailSenderService.sendEmail(event);
     }
 }
