@@ -33,7 +33,7 @@ public class MessageEventListener {
         ContactMessage message  = contactMessageRepository.findById(event.id())
                 .orElseThrow(() -> new IllegalArgumentException("Not found"));
         try {
-            mailSenderService.sendEmail(event);
+            mailSenderService.sendEmail(message);
             message.markMailSent();
         } catch (MailException ex) {
             log.error("Mail for contact message {} could not be sent", message.getId(), ex);
