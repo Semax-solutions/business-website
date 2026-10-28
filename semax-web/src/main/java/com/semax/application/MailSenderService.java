@@ -14,6 +14,9 @@ public class MailSenderService {
     private static final Logger log = LoggerFactory.getLogger(MailSenderService.class);
     private final JavaMailSender mailSender;
 
+    @Value("${app.mail.from}")
+    private String from;
+
     @Value("${app.mail.send-to}")
     private String to;
 
@@ -24,6 +27,7 @@ public class MailSenderService {
     public void sendEmail(MessageEvent event) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(from);
             message.setTo(to);
             message.setReplyTo(event.email());
             message.setSubject("Contact form");
