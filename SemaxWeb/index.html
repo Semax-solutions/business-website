@@ -2,11 +2,48 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./public/Semax_Logo.svg" />
+    <link rel="icon" type="image/svg+xml" href="./Semax_Logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>semaxweb</title>
+    <title>Semax Solutions | Websites, web apps &amp; native apps</title>
+    <meta name="description" content="Semax Solutions builds custom websites, web applications and native apps in the language that fits your use case." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+    <!-- Loading screen styles are inline so it paints before any JS/CSS arrives -->
+    <style>
+      html.is-loading { overflow: hidden; }
+      #preloader {
+        position: fixed; inset: 0; z-index: 100000;
+        display: flex; align-items: center; justify-content: center;
+        background: radial-gradient(120% 90% at 20% 10%, #4A7C7E 0%, #1F3B3D 55%, #142829 100%);
+      }
+      #preloader .pl-inner { display: flex; flex-direction: column; align-items: center; gap: 28px; }
+      #preloader .pl-logo { width: 84px; height: 84px; animation: pl-pulse 1.6s ease-in-out infinite; }
+      #preloader .pl-name {
+        font-family: 'Outfit', system-ui, sans-serif; font-weight: 600; font-size: 14px;
+        letter-spacing: 0.32em; color: rgba(255, 255, 255, 0.85); margin: 0;
+      }
+      #preloader .pl-bar { width: 160px; height: 3px; border-radius: 3px; background: rgba(255, 255, 255, 0.15); overflow: hidden; }
+      #preloader .pl-bar span {
+        display: block; height: 100%; background: #E8956B; transform-origin: left;
+        transform: scaleX(0); animation: pl-fill 3s cubic-bezier(.1, .7, .3, 1) forwards;
+      }
+      @keyframes pl-pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.92); opacity: 0.7; } }
+      @keyframes pl-fill { to { transform: scaleX(0.85); } }
+      @media (prefers-reduced-motion: reduce) {
+        #preloader .pl-logo, #preloader .pl-bar span { animation: none; }
+      }
+    </style>
   </head>
   <body>
+    <script>document.documentElement.classList.add('is-loading')</script>
+    <div id="preloader" role="status" aria-label="Loading Semax Solutions">
+      <div class="pl-inner">
+        <img class="pl-logo" src="/Semax_Logo.svg" alt="" width="84" height="84" />
+        <p class="pl-name">SEMAX SOLUTIONS</p>
+        <div class="pl-bar"><span></span></div>
+      </div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

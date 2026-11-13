@@ -1,14 +1,20 @@
-import styles from './App.module.css'
+import { Routes, Route } from 'react-router-dom'
+import HomePage from './view/page/HomePage'
+import ProductsPage from './view/page/ProductsPage'
+import Header from './view/components/header/Header'
+import Footer from './view/components/footer/Footer'
 
 
 function App() {
-
   return (
     <>
-      <div className={styles.container}>
-        <img className={styles.logo} src="./public/Semax_Logo.svg" alt="Semax Logo" width={200} />
-        Semax Website
-      </div>
+      <Header/>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/home' element={<HomePage />} />
+          <Route path='/products' element={<ProductsPage />} />
+        </Routes>
+      <Footer/>
     </>
   )
 }

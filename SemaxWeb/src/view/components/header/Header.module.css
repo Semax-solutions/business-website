@@ -1,0 +1,133 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    padding: 0 max(24px, calc((100vw - 1200px) / 2 + 24px));
+    background-color: transparent;
+    transition: background-color 0.35s ease, box-shadow 0.35s ease, backdrop-filter 0.35s ease;
+}
+
+.scrolled {
+    background-color: rgba(31, 59, 61, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.innerHeader {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    height: 44px;
+    width: auto;
+}
+
+.nav {
+    display: flex;
+    gap: clamp(24px, 4vw, 56px);
+}
+
+.menu,
+.navbarToggle {
+    display: none;
+}
+
+/* Tablet & mobile */
+@media (max-width: 1024px) {
+    .nav {
+        display: none;
+    }
+
+    .menu {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 9998;
+        display: flex;
+        flex-direction: column;
+        /* Frosted glass: tinted + blurred so the page behind stays out of the way */
+        background-color: rgba(20, 40, 41, 0.72);
+        backdrop-filter: blur(20px) saturate(140%);
+        -webkit-backdrop-filter: blur(20px) saturate(140%);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        /* Wipe in from the right with clip-path: unlike translateX it never
+           sits off-screen, so it can't widen the page on mobile */
+        clip-path: inset(0 0 0 100%);
+        visibility: hidden;
+        transition: clip-path 0.4s cubic-bezier(.7, 0, .3, 1), visibility 0s linear 0.4s;
+    }
+
+    /* Browsers without backdrop-filter get a solid panel instead */
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        .menu {
+            background-color: var(--primary-color-deep);
+        }
+    }
+
+    .menuOpen {
+        clip-path: inset(0 0 0 0);
+        visibility: visible;
+        transition: clip-path 0.4s cubic-bezier(.7, 0, .3, 1), visibility 0s;
+    }
+
+    .menuItems {
+        padding: 1rem 24px;
+    }
+
+    .menuItems p {
+        font-size: 1.5rem;
+        font-family: var(--font-display);
+        margin: 18px 0;
+    }
+
+    .menuItem {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .navbarToggle {
+        display: inline-block;
+        padding: 8px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .iconBar {
+        display: block;
+        height: .15rem;
+        width: 2rem;
+        background-color: #FFFFFF;
+        margin-bottom: .4rem;
+        border-radius: 2px;
+        transition: all 0.2s ease;
+    }
+
+    .iconBar:last-child {
+        margin-bottom: 0;
+    }
+
+    .hideMiddle {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    .closeFirst {
+        transform: translateY(0.55rem) rotate(45deg);
+    }
+
+    .closeLast {
+        transform: translateY(-0.55rem) rotate(-45deg);
+    }
+}
