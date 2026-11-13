@@ -34,13 +34,13 @@ const Footer = () => {
                             </Link>
                         </div>
                         <div className={classes.linkDiv}>
-                            <img className={classes.icon} alt='Email icon' src='/Linkedin-icon.png'></img>
+                            <img className={classes.icon} alt='LinkedIn icon' src='/Linkedin-icon.png'></img>
                             <Link className={classes.link} to='https://www.linkedin.com/in/maxverheul/'>
                                 <p>Max Verheul</p>
                             </Link>
                         </div>
                         <div className={classes.linkDiv}>
-                            <img className={classes.icon} alt='Email icon' src='/Linkedin-icon.png'></img>
+                            <img className={classes.icon} alt='LinkedIn icon' src='/Linkedin-icon.png'></img>
                             <Link className={classes.link} to='https://www.linkedin.com/in/sem-winters/'>
                                 <p>Sem Winters</p>
                             </Link>
@@ -50,31 +50,24 @@ const Footer = () => {
 
                 <div className={classes.services}>
                     <p className={classes.titleInfo}>Services</p>
-                    <p>
-                        Software development
-                        <br></br>
-                        IT Strategy & Architecture
-                        <br></br>
-                        Data & API Integration
-                        <br></br>
-                        Management Services
-                        <br></br>
-                        IT consulting
-                        <br></br>
-                    </p>
+                    <ul className={classes.list}>
+                        <li><Link to='/home#services'>Websites</Link></li>
+                        <li><Link to='/home#services'>Web applications</Link></li>
+                        <li><Link to='/home#services'>Native apps</Link></li>
+                        <li><Link to='/home#services'>Data &amp; API integration</Link></li>
+                        <li><Link to='/home#services'>IT strategy &amp; architecture</Link></li>
+                        <li><Link to='/home#services'>Maintenance &amp; support</Link></li>
+                    </ul>
                 </div>
 
                 <div className={classes.company}>
                     <p className={classes.titleInfo}>Company</p>
-                    <p>
-                        About us
-                        <br></br>
-                        Careers
-                        <br></br>
-                        Contact
-                        <br></br>
-                    </p>
-
+                    <ul className={classes.list}>
+                        <li><Link to='/products'>Products</Link></li>
+                        <li><Link to='/home#about'>About us</Link></li>
+                        <li><Link to='/home#partners'>Partners</Link></li>
+                        <li><a href='mailto:info@semaxsolutions.nl'>Contact</a></li>
+                    </ul>
                 </div>
             </div>
 

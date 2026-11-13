@@ -1,17 +1,44 @@
 .card {
+    position: relative;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: flex-start;
-    color: var(--h-color);
-    border: 1px oklch(0.97 0.01 -3 / 1) solid;
-    /* darkmode */
-    /* border: 1px oklch(0.03 0.01 177 / 1) solid; */
     padding: 32px;
-    border-radius: 10px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    cursor: pointer;
+    border-radius: var(--radius-md);
     background-color: var(--accent-color-clean);
+    border: 1px solid rgba(61, 78, 80, 0.08);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Teal wash that slides up on hover */
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(95, 158, 160, 0.10), rgba(95, 158, 160, 0));
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lift);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
 }
 
 .icon {
@@ -20,38 +47,37 @@
     align-items: center;
     width: 56px;
     height: 56px;
-    background-color: oklch(.984 .014 180.72);
-    /* darkmode */
-    /* background-color: oklch(0.016 0.014 0.72); */
-    margin-bottom: 20px;
-    border-radius: 8px;
+    border-radius: 12px;
+    color: var(--primary-color-header);
+    background-color: rgba(95, 158, 160, 0.12);
+    transition: background-color 0.35s ease, color 0.35s ease, transform 0.35s ease;
 }
 
 .icon svg {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
 }
-
-.icon path {
-    stroke: var(--primary-color-main);
-}
-
-.card:hover path {
-    stroke: var(--accent-color-clean);
-} 
 
 .card:hover .icon {
+    color: var(--accent-color-clean);
     background-color: var(--primary-color-main);
-} 
+    transform: rotate(-6deg) scale(1.05);
+}
+
+.index {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: rgba(61, 78, 80, 0.35);
+}
 
 .title {
-    font-size: 1.2rem;
-    margin: 0 0 12px 0;
-    color: var(--secondary-color-text)
+    font-size: 1.3rem;
+    margin: 0 0 10px 0;
+    color: var(--secondary-color-text);
 }
 
 .description {
     color: var(--accent-color-neutral);
-    font-weight: 500;
     margin: 0;
 }

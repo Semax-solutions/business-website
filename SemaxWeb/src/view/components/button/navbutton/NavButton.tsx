@@ -9,7 +9,7 @@ interface NavButtonProps {
 
 const NavButton = ({ path, children, color }: NavButtonProps) => {
     return (
-        <Link to={path.toLocaleLowerCase()}>
+        <Link to={path.toLocaleLowerCase()} className={classes.link}>
             <p className={classes.text} style={{color: color}}>{children}</p>
         </Link>
     )

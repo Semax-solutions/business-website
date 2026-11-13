@@ -1,0 +1,48 @@
+.marquee {
+    position: relative;
+    overflow: hidden;
+    padding: 28px 0;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+
+.track {
+    display: flex;
+    width: max-content;
+}
+
+.item {
+    display: inline-flex;
+    align-items: center;
+    gap: 40px;
+    padding-right: 40px;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--primary-color-deep);
+}
+
+.item:nth-child(even) {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--primary-color-header);
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--secondary-color-highligts);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .track {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    /* Hide the duplicated half when not animating */
+    .dup {
+        display: none;
+    }
+}

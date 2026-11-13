@@ -1,0 +1,51 @@
+.banner {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: clamp(32px, 6vw, 64px);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, var(--primary-color-deep), var(--primary-color-header));
+    color: #FFFFFF;
+}
+
+.glow {
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    right: -120px;
+    top: -200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232, 149, 107, 0.45), transparent 70%);
+    pointer-events: none;
+}
+
+.content {
+    position: relative;
+    max-width: 620px;
+}
+
+.title {
+    color: #FFFFFF;
+    margin-bottom: 12px;
+}
+
+.text {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+}
+
+.banner :global(.btn) {
+    position: relative;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .banner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

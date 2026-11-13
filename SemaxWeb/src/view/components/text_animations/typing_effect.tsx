@@ -1,25 +1,30 @@
-import {motion, useInView} from 'motion/react';
 import { useRef, type ReactNode } from 'react';
+import { gsap, useGSAP, MOTION_OK } from '../../../lib/gsap';
 
-const TypingEffect = ({children, speed = 0.01, duration = 0.05}: {children: ReactNode, speed?: number, duration?: number}) => {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true });
-    
-    // Convert children to string
+/** Reveals text letter by letter when it scrolls into view. Screen readers get the full text at once. */
+const TypingEffect = ({ children, speed = 0.01, duration = 0.05 }: { children: ReactNode, speed?: number, duration?: number }) => {
+    const ref = useRef<HTMLSpanElement>(null);
     const text = typeof children === 'string' ? children : String(children);
-    
+
+    useGSAP(() => {
+        const mm = gsap.matchMedia();
+        mm.add(MOTION_OK, () => {
+            gsap.from(ref.current!.querySelectorAll('[data-letter]'), {
+                opacity: 0,
+                duration,
+                stagger: speed,
+                ease: 'none',
+                scrollTrigger: { trigger: ref.current, start: 'top 85%', once: true },
+            });
+        });
+        return () => mm.revert();
+    }, { scope: ref, dependencies: [text, speed, duration] });
+
     return (
-        <span ref={ref} aria-label={text}>
+        <span ref={ref} aria-label={text} role="text">
             <span aria-hidden="true">
                 {text.split('').map((letter, index) => (
-                    <motion.span
-                        key={index}
-                        initial={{ opacity: 0 }}
-                        animate={isInView ? { opacity: 1 } : {}}
-                        transition={{ duration: duration, delay: index * speed }}
-                    >
-                        {letter}
-                    </motion.span>
+                    <span data-letter key={index}>{letter}</span>
                 ))}
             </span>
         </span>
